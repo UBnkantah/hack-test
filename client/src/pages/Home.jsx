@@ -50,7 +50,7 @@ const Home = () => {
 
   const listAllDonors = async () => {
     try {
-      const donors = await contract.ListOfDonors();
+      const donors = await contract.allDonors();
       console.log(donors);
       return donors;
     } catch (err) {
@@ -83,7 +83,7 @@ const Home = () => {
       let donors = listAllDonors();
       let donations = [];
       for (const donor of donors) {
-        const records = await contract.viewDonorDonations(address);
+        const records = await contract.viewDonorDonations(donor);
         donations = [...donations, records];
       }
 

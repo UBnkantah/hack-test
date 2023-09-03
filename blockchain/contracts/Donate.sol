@@ -65,4 +65,8 @@ contract DonateFunds {
     ) public view returns (Donation[] memory) {
         return donations[donor];
     }
+
+    function allDonors() public view returns (address[] memory) {
+        return ListOfDonors;
+    }
 }
