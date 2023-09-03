@@ -44,7 +44,7 @@ contract DonateFunds {
     function Donate() public payable isRunning {
         donorBalance[msg.sender] += msg.value;
         uint index = donations[msg.sender].length;
-        donations[msg.sender][index] = Donation(msg.value, block.timestamp);
+        donations[msg.sender].push(Donation(msg.value, block.timestamp));
 
         if(index == 0){
             ListOfDonors.push(msg.sender);
