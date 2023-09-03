@@ -48,6 +48,16 @@ const Home = () => {
     }
   };
 
+  const listAllDonors = async () => {
+    try {
+      const donors = await contract.ListOfDonors();
+      console.log(donors);
+      return donors;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const viewTotalDonate = async () => {
     try {
       const viewBal = await contract.donorBalance(address);
@@ -63,6 +73,23 @@ const Home = () => {
       const DonorRecords = await contract.viewDonorDonations(address);
       console.log(DonorRecords);
       setRecords(DonorRecords);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const allUsersDonations = async () => {
+    try {
+      let donors = listAllDonors();
+      let donations = [];
+      for (const donor of donors) {
+        const records = await contract.viewDonorDonations(address);
+        donations = [...donations, records];
+      }
+
+      donations.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+      console.log(donations);
     } catch (err) {
       console.log(err);
     }
@@ -96,7 +123,7 @@ const Home = () => {
         <br />
         <br />
         <br />
-        <button onClick={usersDonations}>Show All</button>
+        <button onClick={allUsersDonations}>Show All</button>
       </div>
     </div>
   );
