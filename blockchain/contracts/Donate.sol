@@ -46,10 +46,9 @@ contract DonateFunds {
         uint index = donations[msg.sender].length;
         donations[msg.sender].push(Donation(msg.value, block.timestamp));
 
-        if(index == 0){
+        if (index == 0) {
             ListOfDonors.push(msg.sender);
         }
-
     }
 
     function Withdraw() public payable isRunning onlyAdmin {
@@ -59,5 +58,11 @@ contract DonateFunds {
 
     function viewDonation() public view returns (uint) {
         return address(this).balance;
+    }
+
+    function viewDonorDonations(
+        address donor
+    ) public view returns (Donation[] memory) {
+        return donations[donor];
     }
 }
