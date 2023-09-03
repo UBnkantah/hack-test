@@ -92,6 +92,11 @@ const Home = () => {
         <br />
         <br />
         <button onClick={usersDonations}>Show</button>
+        <br />
+        <br />
+        <br />
+        <br />
+        <button onClick={usersDonations}>Show All</button>
       </div>
     </div>
   );
